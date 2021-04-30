@@ -8,9 +8,8 @@ import java.lang.InterruptedException
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 import me.anmolverma.MainGrpcClient.buildClientSslContext
-import me.anmolverma.chat.ChatGroup
 import me.anmolverma.chat.ChatServiceGrpc
-import me.anmolverma.services.users.SocialType
+import me.anmolverma.services.users.CreateUserDto
 import me.anmolverma.services.users.User
 import me.anmolverma.services.users.UsersServiceGrpc
 
@@ -49,21 +48,17 @@ class AllServicesAllMethods internal constructor(
      *
      * @return the message in the HelloReply from the server
      */
-    fun createGroup(logger: Logger): String {
+    fun createGroup(logger: Logger): User? {
         // Use a stub with the given call credentials applied to invoke the RPC.
         val response = userServiceBlockingStub
             .withCallCredentials(callCredentials)
-            .registerUser(
-                User.newBuilder()
-                    .setUname("anmol92verma")
+            .createUser(
+                CreateUserDto.newBuilder()
+                    .setUserName("anmol92verma")
                     .setEmail("anmol.verma4@gmail.com")
-                    .setPhone("+918284854837")
-                    .setId(1)
-                    .setSocialTypeValue(SocialType.EMAIL_VALUE)
-                    .setDisplayName("ANmolVerma")
                     .build()
             )
-        return response.response.message
+        return response.user
     }
 
 }

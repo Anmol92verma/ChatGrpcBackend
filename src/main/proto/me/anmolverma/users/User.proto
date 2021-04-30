@@ -3,35 +3,73 @@ syntax = "proto3";
 option java_package = "me.anmolverma.services.users";
 option java_multiple_files = true;
 option java_outer_classname = "UsersProto";
+import "google/protobuf/empty.proto";
 
 message User {
   int32 id = 1;
-  string uname = 2;
-  string displayName = 3;
-  string phone = 4;
-  string email = 5;
-  SocialType socialType = 6;
+  string uuid = 2;
+  string uname = 3;
+  string firstName = 4;
+  string lastName = 5;
+  string phone = 6;
+  string email = 7;
+  string password = 8;
+  string countryCode = 10;
+  string socialIdentityProvider = 11;
+  string profileImage = 12;
+  bool isActive = 13;
+  bool isDeleted = 14;
+  bool isArchived = 15;
+  int64 createdDate = 16;
+  int64 modifiedDate = 17;
+  int64  lastActiveTimeUTC = 18;
+  int32 accessFailedCount = 19;
+  bool accountLocked = 20;
 }
 
-message Users {
-  repeated User users = 1;
+message CreateUserDto{
+  RegistrationTypes registrationType = 1;
+  string email = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string userName = 5;
+  string password = 6;
+  string socialIdentityToken = 7;
+  string socialIdentityId = 8;
+  string  socialIdentityProvider = 9;
+  string  roleId = 10;
+  string createdBy = 11;
 }
 
-message UserSearch{
-  string uname = 1;
-  string displayName = 2;
+message UpdateUserDto{
+  string   firstName = 1;
+  string lastName = 2;
+  bool  isDeleted = 3;
+  bool  isOtpVerificationEnabled = 4;
+  bool  isTotpVerificationEnabled = 5;
+  string  totpSecret = 6;
+  string  otpVerificationRequestId = 7;
+  string  passwordResetToken = 8;
+  bool isActive = 9;
 }
 
-enum SocialType{
+enum RegistrationTypes {
   FACEBOOK = 0;
   GOOGLE = 1;
   APPLE = 2;
   EMAIL = 3;
 }
 
-message UserResponse{
+message UsersResponse{
+  repeated User users = 1;
+}
+
+message UserResponse {
   User user = 1;
-  Response response = 2;
+}
+
+message UserFindById{
+  string uuid = 1;
 }
 
 message Response {
@@ -40,7 +78,8 @@ message Response {
 }
 
 service UsersService {
-  rpc registerUser(User) returns (UserResponse);
-  rpc loginUser(User) returns (UserResponse);
-  rpc findUser(UserSearch) returns (Users);
+  rpc createUser(CreateUserDto) returns (UserResponse);
+  rpc updateUser(UpdateUserDto) returns (UserResponse);
+  rpc getAllUsers(google.protobuf.Empty) returns (UsersResponse);
+  rpc getUserById(UserFindById) returns(UserResponse);
 }

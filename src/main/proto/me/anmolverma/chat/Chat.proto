@@ -8,7 +8,7 @@ import "me/anmolverma/users/User.proto";
 import "google/protobuf/empty.proto";
 
 message ChatGroup {
-  Users users = 1;
+  repeated User users = 1;
   string groupName = 2;
   string groupDescription = 3;
   string groupImage = 4;

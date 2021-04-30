@@ -1,6 +1,6 @@
 package me.anmolverma.domain
 
-import me.anmolverma.services.users.SocialType
+import me.anmolverma.services.users.RegistrationTypes
 import me.anmolverma.services.users.User
 import org.bson.types.ObjectId
 
@@ -11,7 +11,7 @@ data class AppUser(
     val displayName: String,
     val email: String,
     val phone: String,
-    val socialType: SocialType
+    val registrationTypes: RegistrationTypes
 )
 
 
@@ -19,9 +19,9 @@ fun User.toAppUser(): AppUser {
     return AppUser(
         userId = this.id,
         uname = this.uname,
-        displayName = this.displayName,
+        displayName = this.firstName + " " + this.lastName,
         email = this.email,
         phone = this.phone,
-        socialType = this.socialType
+        registrationTypes = RegistrationTypes.valueOf(this.socialIdentityProvider)
     )
 }

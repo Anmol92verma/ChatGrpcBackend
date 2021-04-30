@@ -3,9 +3,11 @@ package me.anmolverma.auth
 import io.grpc.CallCredentials
 import io.grpc.Metadata
 import io.grpc.Status
+import io.jsonwebtoken.Claims
 import java.util.concurrent.Executor
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
+import io.jsonwebtoken.impl.DefaultClaims
 import java.time.Instant
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -34,8 +36,10 @@ class JwtCredential(private val subject: String) : CallCredentials() {
     ) {
         // Make a JWT compact serialized string.
         //set one day as expiration time
+        val claims = DefaultClaims()
+        claims.subject = subject
         val jwt: String = Jwts.builder()
-            .setSubject(subject)
+            .setClaims(claims)
             .setExpiration(Date.from(Instant.now().plusMillis(TimeUnit.DAYS.toMillis(1))))
             .signWith(SignatureAlgorithm.HS256, AuthConstants.JWT_SIGNING_KEY)
             .compact()
