@@ -17,14 +17,14 @@ object MainGrpcServer {
 
         val appDatabase = appDatabase()
         val server = NettyServerBuilder.forPort(8443)
-            .useTransportSecurity(
+            /*.useTransportSecurity(
                 // reference file
                 File("./src/ssl/server.crt"),
                 File("./src/ssl/server.pem")
-            )
+            )*/
             .addService(UsersService(userCollection(appDatabase)))
             .addService(ChatService())
-            .intercept(JWTInterceptor())
+            //.intercept(JWTInterceptor())
             .build()
 
         server.start()

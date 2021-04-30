@@ -77,7 +77,7 @@ dependencies {
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "me.anmolverma.MainGrpcServer"
+        attributes["Main-Class"] = "in.anmolverma.MainGrpcServer"
     }
 
     // To add all of the dependencies

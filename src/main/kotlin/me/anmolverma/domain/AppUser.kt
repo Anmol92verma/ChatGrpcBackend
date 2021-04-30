@@ -14,7 +14,6 @@ data class AppUser(
     val registrationTypes: RegistrationTypes
 )
 
-
 fun User.toAppUser(): AppUser {
     return AppUser(
         userId = this.id,
