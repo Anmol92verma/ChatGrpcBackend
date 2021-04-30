@@ -6,6 +6,8 @@ plugins {
     kotlin("jvm") version "1.4.31"
     kotlin("kapt") version "1.4.31"
     id("com.google.protobuf") version "0.8.15"
+    id("com.heroku.sdk.heroku-gradle") version "2.0.0"
+
 }
 
 group = "me.anmolverma"
@@ -77,7 +79,7 @@ dependencies {
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "in.anmolverma.MainGrpcServer"
+        attributes["Main-Class"] = "me.anmolverma.MainGrpcServer"
     }
 
     // To add all of the dependencies

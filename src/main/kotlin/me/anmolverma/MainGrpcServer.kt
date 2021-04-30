@@ -16,7 +16,7 @@ object MainGrpcServer {
     fun main(args: Array<String>) {
 
         val appDatabase = appDatabase()
-        val server = NettyServerBuilder.forPort(8443)
+        val server = NettyServerBuilder.forPort(443)
             /*.useTransportSecurity(
                 // reference file
                 File("./src/ssl/server.crt"),
