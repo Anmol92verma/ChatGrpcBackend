@@ -55,18 +55,13 @@ dependencies {
     implementation("io.grpc:grpc-kotlin-stub:1.0.0")
     implementation("com.google.protobuf:protobuf-java:3.15.3")
 
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("com.google.firebase:firebase-admin:7.2.0")
 
     implementation("com.google.guava:guava:30.1-jre")
 
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.litote.kmongo:kmongo-coroutine:4.2.5")
     implementation("org.slf4j:slf4j-log4j12:1.7.29")
-
-    val dagger_version = "2.33"
-    implementation("com.google.dagger:dagger:${dagger_version}")
-    kapt("com.google.dagger:dagger-compiler:${dagger_version}")
-
 
     runtimeOnly("javax.xml.bind:jaxb-api:2.3.1")
 
